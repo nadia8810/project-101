@@ -23,7 +23,7 @@ $columns = array(
 // SQL server connection information
 $sql_details = array(
     'user' => 'root',
-    'pass' => 'root1234',
+    'pass' => '12345678',
     'db'   => 'project101',
     'host' => 'localhost'
 );

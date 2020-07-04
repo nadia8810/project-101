@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $username = "root";
-$password = "root1234";
+$password = "12345678";
 $dbname = "project101"; //ชื่อฐานข้อมูล
 
 //การเชื่อมต่อฐานข้อมูล

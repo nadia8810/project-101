@@ -1,4 +1,4 @@
-$(document).ready(async function() {
+$(document).ready(function() {
     $('#dataTable').DataTable({
         "processing": true,
         "serverSide": true,
@@ -12,13 +12,19 @@ $(document).ready(async function() {
             { "data": "id" },
         ],
         "rowCallback": function(row, data) {
-            a = ''
-            if (data.status == 1) {
-                a += 'อยู่ในสัญญา'
-            } else {
-                a += 'หมดสัญญา'
+                a = ''
+            if(data.status == 1){
+                a += '<label class="switch">'
+                a += '<input type="checkbox" class="primary" id="check-status" data-index="'+ data.id +'" value="0" checked>'
+                a += '<span class="slider round"></span>'
+                a += '</label>'
+            }else if (data.status == 0) {
+                a += '<label class="switch">'
+                a += '<input type="checkbox" class="primary" id="check-status" data-index="'+ data.id +'" value="1">'
+                a += '<span class="slider round"></span>'
+                a += '</label>'
             }
-
+            
             $("td", row).eq(4).html(a);
 
             s = ''
@@ -191,6 +197,18 @@ $(document).on("click", "#btn-save", function() {
         }
     })
 })
+
+$(document).on("change", "#check-status", function() {
+    $.ajax({
+        url: "apps/customer/action-status-customer.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            id: this.dataset.index,
+            status: $(this).val()
+        },
+    })
+});
 
 $(document).on("click", '#edit-customer', function() {
     id = this.dataset.index
